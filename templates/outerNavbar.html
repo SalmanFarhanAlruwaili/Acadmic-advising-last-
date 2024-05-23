@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+    <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet" />
+    <title>Academic Advising</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <style>
+        body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+            padding-top: 70px;
+            background-color: rgb(193, 223, 223);
+        }
+
+        .titleContainer {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .custom-card {
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            padding-top: 50px;
+            padding-bottom: 50px;
+            border-radius: 10px;
+        }
+
+        .card-title {
+            color: white;
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+
+        .btn {
+            background-color: white;
+        }
+
+        .msg {
+            color: red;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" style="color: wheat;" href="{{url_for('renderRoleSelectionPage')}}">
+                    <div style="display: flex;  align-items: center;">
+                        <img src="/static/logo.jpeg" width="30" height="30" style="margin-right: 10px;" alt="">
+                        Academic Advising
+                    </div>
+                </a>
+            </div>
+        </div>
+    </nav>
+    {% block content %}
+    {% endblock %}
+</body>
+
+</html>

@@ -1,0 +1,49 @@
+{% extends "hodNavbar.html" %}
+{% block content %}
+<div class="container mt-5">
+  <h2 class="mb-4">Students Listing</h2>
+  {% for class, students in students_by_class.items() %}
+    <h2 class="mb-4">Program : {{ class }}</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Student ID</th>
+                <th>Student Name</th>
+                <th>Father Name</th>
+                <th>Student Email</th>
+                <th>Program</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in range(students|length) %}
+            <tr>
+                <form id="updateFormStudents{{ students[i].studentID}}" method="POST" action="/updateStudents/{{ students[i].studentID }}"
+                    onsubmit="updateStudent({{ students[i].studentID }}); return false;">
+                    
+                    <td>
+                      <input type="text" class="form-control" name="studentID" id="studentID" value="{{ students[i].studentID }}">
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" name="studentName" id="studentName" value="{{ students[i].studentName }}">
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" name="fatherName" id="fatherName" value="{{ students[i].fatherName }}">
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" name="studentEmail" id="studentEmail" value="{{ students[i].studentEmail }}">
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" name="studentProgram" id="studentProgram" value="{{ students[i].studentProgram }}" />
+                    </td>
+                </form>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endfor %}
+
+</div>
+
+{% endblock %}
+
+

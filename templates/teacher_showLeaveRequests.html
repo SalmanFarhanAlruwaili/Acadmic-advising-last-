@@ -1,0 +1,119 @@
+{% extends "teacherNavbar.html" %}
+{% block content %}
+<div class="container">
+    <h2 class="mb-4">Leaves History</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Teacher</th>
+                <th>Leave Days</th>
+                <th>Requested At</th>
+                <th>Teacher Approval</th>
+                <th>Advisor Approval</th>
+                <th>HOD Approval</th>
+                <th>Final Status</th>
+                <th colspan="2" style="text-align:center;">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in range(leaves|length) %}
+            <tr>
+                <form id="approveFormLeave{{ leaves[i].id}}" method="POST"
+                    action="/approveLeavesTeacher/{{ leaves[i].id }}"
+                    onsubmit="approveLeave({{ leaves[i].id }}); return false;">
+                    <td>
+                        <input type="text" readonly class="form-control" name="studentId" id="studentId"
+                            value="{{ leaves[i].studentId }}">
+                    </td>
+                    <td>
+                        <input type="text" readonly class="form-control" name="studentName" id="studentName"
+                            value="{{ leaves[i].studentName }}">
+                    </td>
+                    <td>
+                        <input type="text" readonly class="form-control" name="teacherName" id="teacherName"
+                            value="{{ leaves[i].teacherName }}">
+                    </td>
+                    <td>
+                        <input type="text" readonly class="form-control" name="numDays" id="numDays"
+                            value="{{ leaves[i].numDays }}">
+                    </td>
+                    <td>
+                        <input type="text" readonly class="form-control" name="requestedAt" id="requestedAt"
+                            value="{{ leaves[i].requestedAt }}" />
+                    </td>
+                    <td>
+                        <input type="text" readonly class="form-control" name="teacherApproval" id="teacherApproval"
+                            value="{{ leaves[i].approved_by_teacher }}">
+                    </td>
+                    <td>
+                        <input type="text" readonly class="form-control" name="advisorApproval" id="advisorApproval"
+                            value="{{ leaves[i].approved_by_advisor }}">
+                    </td>
+                    <td>
+                        <input type="text" readonly class="form-control" name="hodApproval" id="hodApproval"
+                            value="{{ leaves[i].approved_by_hod }}">
+                    </td>
+                    <td>
+                        <input type="text" readonly class="form-control" name="finalStatus" id="finalStatus"
+                            value="{{ leaves[i].final_status }}" />
+                    </td>
+                    <td>
+                        <button class="btn btn-sm btn-warning" type="submit">Approve</button>
+                    </td>
+                </form>
+                <td>
+                    <form id="deleteFormLeaves{{ leaves[i].id }}" method="POST"
+                        action="/deleteLeaves/{{ leaves[i].id }}"
+                        onsubmit="deleteLeave({{ leaves[i].id }}); return false;">
+                        <button class="btn btn-sm btn-danger" type="submit">Reject</button>
+                        <input type="hidden" name="studentId" value="{{ leaves[i].studentId }}">
+                        <input type="hidden" name="studentName" value="{{ leaves[i].studentName }}">
+                        <input type="hidden" name="teacherName" value="{{ leaves[i].teacherName }}">
+                        <input type="hidden" name="requestedAt" value="{{ leaves[i].requestedAt }}">
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <script>
+        function deleteLeave(leaveId) {
+            if (confirm('Are you sure you want mark this student absent?')) {
+                // Submit the form asynchronously using JavaScript
+                var form = document.getElementById('deleteFormLeaves' + leaveId);
+                var xhr = new XMLHttpRequest();
+                xhr.open('POST', form.action, true);
+                xhr.onload = function () {
+                    if (xhr.status === 200) {
+                        // Reload the page after successful deletion
+                        window.location.reload();
+                    } else {
+                        alert('Error rejecting Leave.');
+                    }
+                };
+                xhr.send(new FormData(form));
+            }
+        }
+
+        function approveLeave(id) {
+            if (confirm('Are you sure you want to approve this leave?')) {
+                // Submit the form asynchronously using JavaScript
+                var form = document.getElementById('approveFormLeave' + id);
+                var xhr = new XMLHttpRequest();
+                xhr.open('POST', form.action, true);
+                xhr.onload = function () {
+                    if (xhr.status === 200) {
+                        // Reload the page after successful deletion
+                        window.location.reload();
+                    } else {
+                        alert('Error approving leave.');
+                    }
+                };
+                xhr.send(new FormData(form));
+            }
+        }
+    </script>
+</div>
+{% endblock %}

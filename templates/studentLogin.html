@@ -1,0 +1,50 @@
+{% extends "outerNavbar.html" %}
+{% block content %}
+<div class="container">
+  <div class="titleContainer">
+    <img src="/static/logo.jpeg" width="250" height="250" style="border-radius: 50%;" alt="logo image">
+    <h1>Welcome Student</h1>
+  </div>
+
+  <div class="col-lg-3"></div>
+  <form method="post" action="{{ url_for('authenticateStudent')}}" autocomplete="off">
+    <div class="col-lg-6 col-sm-12">
+      </br>
+      <form>
+        <h4>Please login to your account</h4>
+        <div class="msg">{{ msg }}</div>
+        <!-- Email and pass word fields -->
+        <div class="form-outline mb-4">
+          <label class="form-label" for="studentEmail">Email</label>
+          <input type="email" name="studentEmail" placeholder="Enter Your Email ID" class="form-control" id="email"
+            required>
+        </div>
+        </br>
+        <div class="form-outline mb-4">
+          <label class="form-label" for="studentPssword">Password</label>
+          <input type="password" name="studentPassword" placeholder="Enter Your Password" class="form-control"
+            id="password" required>
+        </div>
+        </br>
+        <!-- Press Log in -->
+        <div class="text-center pt-1 mb-5 pb-1">
+          <button class="btn-block fa-lg gradient-custom-2"
+            style="font-weight: bold; background-color: burlywood; color: black;padding-top: 10px; padding-bottom: 10px; border-radius: 5px;"
+            value="Login" type="submit">Login</button>
+        </div>
+      </form>
+      <!-- Goto sign up page -->
+      <div class="text-center">
+        </br>
+        <div class="row">
+          <p class="bottom" style="color: black; font-weight: 600;">Forgot password?
+            <!-- <a class="bottom" > Sign Up here</a> -->
+            <a class="bottom"> Click here to reset.</a>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-3"></div>
+  </form>
+</div>
+{% endblock %}

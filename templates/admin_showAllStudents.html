@@ -1,0 +1,92 @@
+{% extends "adminNavbar.html" %}
+{% block content %}
+<div class="container mt-5">
+  <h2 class="mb-4">Students Listing</h2>
+  <table class="table">
+      <thead>
+          <tr>
+              <th>Student ID</th>
+              <th>Student Name</th>
+              <th>GPA</th>
+              <th>Student Email</th>
+              <th>Program</th>
+              <th colspan="2" style="text-align:center;">Actions</th>
+          </tr>
+      </thead>
+      <tbody>
+          {% for i in range(students|length) %}
+          <tr>
+              <form id="updateFormStudents{{ students[i].studentID}}" method="POST" action="/updateStudents/{{ students[i].studentID }}"
+                  onsubmit="updateStudent({{ students[i].studentID }}); return false;">
+                  
+                  <td>
+                    <input type="text" class="form-control" name="studentID" id="studentID" value="{{ students[i].studentID }}">
+                  </td>
+                  <td>
+                      <input type="text" class="form-control" name="studentName" id="studentName" value="{{ students[i].studentName }}">
+                  </td>
+                  <td>
+                      <input type="text" class="form-control" name="gpa" id="gpa" value="{{ students[i].gpa }}">
+                  </td>
+                  <td>
+                      <input type="text" class="form-control" name="studentEmail" id="studentEmail" value="{{ students[i].studentEmail }}">
+                  </td>
+                  <td>
+                      <input type="text" class="form-control" name="studentProgram" id="studentProgram" value="{{ students[i].studentProgram }}" />
+                  </td>
+                  <td>
+                      <button class="btn btn-sm btn-warning" type="submit">Update</button>
+                  </td>
+              </form>
+              <td>
+                  <form id="deleteFormStudents{{ students[i].studentID }}" method="POST" action="/deleteStudents/{{ students[i].studentID }}"
+                      onsubmit="deleteStudent({{ students[i].studentID }}); return false;">
+                      <button class="btn btn-sm btn-danger" type="submit">Delete</button>
+                  </form>
+              </td>
+          </tr>
+          {% endfor %}
+      </tbody>
+  </table>
+</div>
+
+<script>
+function deleteStudent(studentId) {
+    if (confirm('Are you sure you want to delete this student?')) {
+        // Submit the form asynchronously using JavaScript
+        var form = document.getElementById('deleteFormStudents' + studentId);
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', form.action, true);
+        xhr.onload = function () {
+            if (xhr.status === 200) {
+                // Reload the page after successful deletion
+                window.location.reload();
+            } else {
+                alert('Error deleting student.');
+            }
+        };
+        xhr.send(new FormData(form));
+    }
+}
+
+function updateStudent(studentId) {
+    if (confirm('Are you sure you want to update this student?')) {
+        // Submit the form asynchronously using JavaScript
+        var form = document.getElementById('updateFormStudents' + studentId);
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', form.action, true);
+        xhr.onload = function () {
+            if (xhr.status === 200) {
+                // Reload the page after successful deletion
+                window.location.reload();
+            } else {
+                alert('Error updating student.');
+            }
+        };
+        xhr.send(new FormData(form));
+    }
+}
+</script>
+{% endblock %}
+
+

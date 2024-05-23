@@ -1,0 +1,88 @@
+{% extends "adminNavbar.html" %}
+{% block content %}
+<div class="container mt-5">
+  <h2 class="mb-4">Teachers Listing</h2>
+  <table class="table">
+      <thead>
+          <tr>
+              <th>Teacher ID</th>
+              <th>Teacher Name</th>
+              <th>Teacher Email</th>
+              <th>Specialization</th>
+              <th colspan="2" style="text-align:center;">Actions</th>
+          </tr>
+      </thead>
+      <tbody>
+          {% for i in range(teachers|length) %}
+          <tr>
+              <form id="updateFormTeachers{{ teachers[i].teacherID}}" method="POST" action="/updateTeachers/{{ teachers[i].teacherID }}"
+                  onsubmit="updateTeacher({{ teachers[i].teacherID }}); return false;">
+                  
+                  <td>
+                    <input type="text" class="form-control" name="teacherID" id="studentID" value="{{ teachers[i].teacherID }}">
+                  </td>
+                  <td>
+                      <input type="text" class="form-control" name="teacherName" id="teacherName" value="{{ teachers[i].teacherName }}">
+                  </td>
+                  <td>
+                      <input type="text" class="form-control" name="teacherEmail" id="teacherEmail" value="{{ teachers[i].teacherEmail }}">
+                  </td>
+                  <td>
+                      <input type="text" class="form-control" name="specialization" id="specialization" value="{{ teachers[i].specialization }}" />
+                  </td>
+                  <td>
+                      <button class="btn btn-sm btn-warning" type="submit">Update</button>
+                  </td>
+              </form>
+              <td>
+                  <form id="deleteFormTeachers{{ teachers[i].studentID }}" method="POST" action="/deleteTeachers/{{ teachers[i].teacherID }}"
+                      onsubmit="deleteTeacher({{ teachers[i].studentID }}); return false;">
+                      <button class="btn btn-sm btn-danger" type="submit">Delete</button>
+                  </form>
+              </td>
+          </tr>
+          {% endfor %}
+      </tbody>
+  </table>
+</div>
+
+<script>
+function deleteTeacher(teacherId) {
+    if (confirm('Are you sure you want to delete this teacher?')) {
+        // Submit the form asynchronously using JavaScript
+        var form = document.getElementById('deleteFormTeachers' + teacherId);
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', form.action, true);
+        xhr.onload = function () {
+            if (xhr.status === 200) {
+                // Reload the page after successful deletion
+                window.location.reload();
+            } else {
+                alert('Error deleting teacher.');
+            }
+        };
+        xhr.send(new FormData(form));
+    }
+}
+
+function updateTeacher(teacherId) {
+    if (confirm('Are you sure you want to update this teacher?')) {
+        // Submit the form asynchronously using JavaScript
+        var form = document.getElementById('updateFormTeachers' + teacherId);
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', form.action, true);
+        xhr.onload = function () {
+            if (xhr.status === 200) {
+                // Reload the page after successful deletion
+                window.location.reload();
+            } else {
+                alert('Error updating teacher.');
+            }
+        };
+        xhr.send(new FormData(form));
+    }
+}
+</script>
+{% endblock %}
+
+

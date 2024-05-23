@@ -1,0 +1,59 @@
+{% extends "studentNavbar.html" %}
+{% block content %}
+<div class="container">
+    <div class="col-lg-3"></div>
+    <div class="col-lg-6 col-md-12 col-sm-12">
+      <form action="/requestLeave" method="post" enctype="multipart/form-data">
+        <div style="display: flex; flex-direction: column; align-items: center">
+          <h2>Request Leave</h2>
+        </div>
+        <div class="msg">{{ error }}</div>
+        <div class="form-group">
+          <label for="studentId">Student ID:</label>
+          <input type="text" class="form-control" id="studentId" name="studentId" readonly
+            value="{{ studentId }}">
+        </div>
+        <div class="form-group">
+          <label for="studentName">Student Name:</label>
+          <input type="text" class="form-control" id="studentName" name="studentName" readonly
+            value="{{ studentName }}">
+        </div>
+
+        <div class="form-group">
+            <label for="remainingLeaves">Remaining Leaves:</label>
+            <input type="text" class="form-control" id="allowedLeaves" name="allowedLeaves" readonly
+              value="{{ leaves.allowedLeaves }}">
+        </div>
+
+        <div class="form-group">
+          <label for="teacherName">Teacher Name:</label>
+          <select class="form-control" id="teacherName" name="teacherName" required>
+            <!-- Add your teacher options here -->
+            {% for teacher in teachers %}
+            <option class="form-control" value="{{ teacher.teacher }}">{{ teacher.teacher }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label for="numDays">Leave Days:</label>
+          <select class="form-control" id="numDays" name="numDays" required>
+            <option class="form-control" value="1">1</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="medicalCertificate">Medical Certificate:</label>
+          <input type="file" class="form-control-file" id="medicalCertificate" name="medicalCertificate" required>
+        </div>
+
+        <div class="form-group">
+          <button style="width: 100%;" type="submit" class="btn btn-primary">
+            Submit
+          </button>
+        </div>
+      </form>
+    </div>
+    <div class="col-lg-3"></div>
+  </div>
+{% endblock %}

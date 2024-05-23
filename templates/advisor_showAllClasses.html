@@ -1,0 +1,57 @@
+{% extends "advisorNavbar.html" %}
+{% block content %}
+<div class="container mt-5">
+  <h2 class="mb-4">Students Listing</h2>
+  {% for class, students in students_by_class.items() %}
+    <h2 class="mb-4">Class : {{ class }}</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Student ID</th>
+                <th>Student Name</th>
+                <th>Course Title</th>
+                <th>Hours</th>
+                <th>Class</th>
+                <th>Teacher</th>
+                <th>Leaves</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in range(students|length) %}
+            <tr>
+                <form>
+                    
+                    <td>
+                      <input type="text" class="form-control" name="studentid" id="studentid" value="{{ students[i].studentid }}">
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" name="studentName" id="studentName" value="{{ students[i].studentName }}">
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" name="courseTitle" id="courseTitle" value="{{ students[i].courseTitle }}">
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" name="creditHours" id="creditHours" value="{{ students[i].creditHours }}">
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" name="className" id="className" value="{{ students[i].class }}" />
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" name="teacher" id="teacher" value="{{ students[i].teacher }}" />
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" name="allowedLeaves" id="allowedLeaves" value="{{ students[i].allowedLeaves }}" />
+                    </td>
+                   
+                </form>
+                
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endfor %}
+
+</div>
+{% endblock %}
+
+

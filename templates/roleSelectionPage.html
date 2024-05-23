@@ -1,0 +1,52 @@
+{% extends "outerNavbar.html" %}
+{% block content %}
+<div class="container">
+  <div class="row justify-content-center">
+      <!-- Card 1 -->
+      <div class="col-lg-4 col-md-12 custom-card">
+          <div class="card" style="background-color: #007fff;">
+              <div class="card-body text-center">
+                  <h2 class="card-title">Administration Staff</h2>
+                  <a href="{{url_for('renderAdminLoginPage')}}" class="btn">Sign In</a>
+              </div>
+          </div>
+      </div>
+
+    <div class="col-lg-4 col-md-12 custom-card">
+        <div class="card" style="background-color: #6564bf;">
+            <div class="card-body text-center">
+                <h2 class="card-title">Head of Department</h2>
+                <a href="{{url_for('renderHODLoginPage')}}" class="btn">Sign In</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-4 col-md-12 custom-card">
+      <div class="card" style="background-color: #996515;">
+          <div class="card-body text-center">
+              <h2 class="card-title">Academic Advisor</h2>
+              <a href="{{url_for('renderAcademicAdvisorLoginPage')}}" class="btn">Sign In</a>
+          </div>
+      </div>
+    </div>
+      <!-- Card 2 -->
+      <div class="col-lg-4 col-md-12 custom-card">
+          <div class="card" style="background-color: #808000;">
+              <div class="card-body text-center">
+                  <h2 class="card-title">Teachers</h2>
+                  <a href="{{url_for('renderTeacherLoginPage')}}" class="btn">Sign In</a>
+              </div>
+          </div>
+      </div>
+      <!-- Card 3 -->
+      <div class="col-lg-4 col-md-12 custom-card">
+          <div class="card" style="background-color: #416bdf;">
+              <div class="card-body text-center">
+                  <h2 class="card-title">Students</h2>
+                  <a href="{{url_for('renderStudentLoginPage')}}" class="btn">Sign In</a>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+{% endblock %}

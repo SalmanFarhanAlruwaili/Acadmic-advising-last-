@@ -1,0 +1,40 @@
+{% extends "hodNavbar.html" %}
+{% block content %}
+<div class="container mt-5">
+  <h2 class="mb-4">Courses Listing</h2>
+  <table class="table">
+      <thead>
+          <tr>
+              <th>Course Code</th>
+              <th>Course Title</th>
+              <th>Credits</th>
+              <th>Class Name</th>
+              <th>Teacher Name</th>
+          </tr>
+      </thead>
+      <tbody>
+          {% for i in range(courses|length) %}
+          <tr>
+              <form>
+                  <td>
+                    <input type="text" readonly class="form-control" name="courseCode" id="courseCode" value="{{ courses[i].courseCode }}">
+                  </td>
+                  <td>
+                      <input type="text" readonly class="form-control" name="courseTitle" id="courseTitle" value="{{ courses[i].courseTitle }}">
+                  </td>
+                  <td>
+                      <input type="text" readonly class="form-control" name="creditHours" id="creditHours" value="{{ courses[i].creditHours }}">
+                  </td>
+                  <td>
+                      <input type="text" readonly class="form-control" name="class" id="class" value="{{ courses[i].class }}">
+                  </td>
+                  <td>
+                      <input type="text" readonly class="form-control" name="teacherName" id="teacherName" value="{{ courses[i].teacherName }}" />
+                  </td>
+              </form>
+          </tr>
+          {% endfor %}
+      </tbody>
+  </table>
+</div>
+{% endblock %}

@@ -1,0 +1,61 @@
+{% extends "adminNavbar.html" %}
+{% block content %}
+<div class="container">
+  <div class="col-lg-3"></div>
+  <div class="col-lg-6 col-md-12 col-sm-12">
+    <form action="/addNewCourseToDB" method="post">
+      <div
+        style="display: flex; flex-direction: column; align-items: center"
+      >
+        <h2>Add New Course</h2>
+      </div>
+      <div class="msg">{{ error }}</div>
+      <div class="form-group">
+        <label for="courseCode">Course Code:</label>
+        <input type="text" class="form-control" id="courseCode" name="courseCode" required>
+      </div>
+      <div class="form-group">
+        <label for="courseTitle">Course Title:</label>
+        <input type="text" class="form-control" id="courseTitle" name="courseTitle" required>
+      </div>
+
+      <div class="form-group">
+        <label for="creditHours">Credit Hours:</label>
+        <select class="form-control" id="creditHours" name="creditHours" required>
+          <option class="form-control" value="1">1</option>
+          <option class="form-control" value="2">2</option>
+          <option class="form-control" value="3">3</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="className">Class:</label>
+        <select class="form-control" id="className" name="className" required>
+          <!-- Add your class options here -->
+          <option class="form-control" value="Class1">Class 1</option>
+          <option class="form-control" value="Class2">Class 2</option>
+          <option class="form-control" value="class3">Class 3</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="teacherName">Teacher Name:</label>
+        <select class="form-control" id="teacherName" name="teacherName" required>
+          <!-- Add your teacher options here -->
+          {% for teacher in teachers %}
+            <option class="form-control" value="{{ teacher.teacherName }}">{{ teacher.teacherName }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="form-group">
+        <button
+          style="width: 100%;"
+          type="submit"
+          class="btn btn-primary"
+        >
+          Submit
+        </button>
+      </div>
+    </form>
+  </div>
+  <div class="col-lg-3"></div>
+</div>
+{% endblock %}
